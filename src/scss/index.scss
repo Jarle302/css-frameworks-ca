@@ -23,6 +23,17 @@
 .h-px--400 {
   height: 400px;
 }
+.size-7px {
+  font-size: 12px;
+}
+
+.h-vh-90 {
+  height: 90vh;
+}
+
+.h-px--150 {
+  height: 150px;
+}
 
 .w-px--max--110 {
   max-width: 100px;
@@ -30,4 +41,87 @@
 
 .w-px--min--400 {
   min-width: 400px;
+}
+
+.max-width-85 {
+  max-width: 85px;
+}
+
+#modal,
+#modalEdit {
+  position: fixed;
+  display: none;
+  z-index: 3000;
+}
+#modalEdit {
+  top: 1px;
+  left: 1px;
+}
+
+.hide {
+  display: none;
+}
+
+.postImage {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.spinnerUniqueClassName {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  z-index: 5000;
+}
+
+.emoji-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  background: rgb(239, 233, 215);
+  padding: 15px 10px;
+  border: 3px solid rgb(61, 60, 55);
+  border-radius: 20px;
+  box-shadow: 2px 1px 7px;
+}
+
+#statusText {
+  position: fixed;
+  top: -100%;
+  left: 50%;
+  color: green;
+  font-size: 2rem;
+  z-index: 5001;
+  font-weight: 700;
+  transform: translate(-50%, 50%);
+}
+
+.start-animation {
+  animation: fadeText 1s ease-in-out forwards;
+}
+
+@keyframes fadeText {
+  0% {
+    display: block;
+    opacity: 0.7;
+    top: 50%;
+  }
+  50% {
+    opacity: 1;
+  }
+  99% {
+    top: 50%;
+  }
+  100% {
+    opacity: 0;
+    display: none;
+  }
+}
+
+.left-col--background {
+  background: linear-gradient(45deg, #706543, #3d3c37);
+}
+
+.card--shadow {
+  box-shadow: 1px 1px 3px;
 }

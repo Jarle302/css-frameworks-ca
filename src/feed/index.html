@@ -18,7 +18,8 @@
       href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Josefin+Sans:wght@400;700&family=Josefin+Slab:wght@400;700&family=Montserrat+Alternates:ital,wght@0,400;1,200&family=Montserrat:wght@400;500;700&family=Noto+Sans&family=Noto+Serif:wght@400;700&family=Oswald&family=Source+Code+Pro:wght@400;700&display=swap"
       rel="stylesheet" />
     <link rel="stylesheet" href="/dist/css/index.css" />
-    <script src="/src/js/index.js"></script>
+    <script src="/src/js/feed.js" type="module"></script>
+    <script src="/src/js/nav.js" defer></script>
   </head>
   <body>
     <header class="bg-primary">
@@ -48,9 +49,7 @@
                 >
               </li>
               <li class="nav-item">
-                <a class="nav-link text-white" href="../../index.html"
-                  >Logout</a
-                >
+                <button id="logout" class="nav-link text-white">Logout</button>
               </li>
             </ul>
           </div>
@@ -58,22 +57,22 @@
       </nav>
     </header>
     <main class="container-fluid">
+      <div
+        class="spinner-border text-primary hide spinnerUniqueClassName"
+        role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
       <div class="row">
-        <section class="col-lg-3 bg-primary text-secondary">
+        <section
+          class="col-lg-3 bg-primary text-secondary text-center left-col--background">
           <a href="/src/profile/index.html">
             <img
+              data-userImg
               class="rounded-circle w-100"
               src="/src/assets/profile.jpeg"
               alt="Profile picture of Thistle" />
           </a>
-          <span>@TipsyThistle</span>
-          <h2>Master of Inebriated Incantations</h2>
-          <ul class="list-unstyled">
-            <li>lvl: 32</li>
-            <li>class: Wizard</li>
-            <li>Race: Human</li>
-            <li>Alignment: Chaotic Good</li>
-          </ul>
+          <h2 class="my-4" data-userName>Master of Inebriated Incantations</h2>
         </section>
 
         <div class="col-lg-7">
@@ -87,19 +86,40 @@
                 required
                 minlength="1"
                 placeholder="search" />
-              <button class="btn btn-secondary">Search</button>
+              <button
+                type="button"
+                id="search--button"
+                class="btn btn-secondary">
+                Search
+              </button>
+              <button
+                type="button"
+                id="filter--button"
+                class="btn btn-outline-primary">
+                filter
+              </button>
             </div>
-
-            <select
-              class="form-select w-25 mb-2"
-              name="select--search--feed"
-              id="select--search--feed">
-              <option selected value="sort-by">sort by</option>
-              <option value="user">user</option>
-              <option value="date">date</option>
-              <option value="topic">topic</option>
-              <option value="hashtag">hashtag</option>
-            </select>
+            <div class="d-flex gap-2">
+              <select
+                class="form-select w-25 mb-2"
+                name="sort--feed"
+                id="sort--feed">
+                <option selected value="">sort by</option>
+                <option value="author">user</option>
+                <option value="created">date</option>
+                <option value="title">title</option>
+                <option value="tags">tags</option>
+                <option value="body">post body</option>
+              </select>
+              <select
+                class="form-select w-25 mb-2"
+                name="sort--order"
+                id="sort--order">
+                <option selected value="desc">sort order</option>
+                <option value="desc">descending</option>
+                <option value="asc">ascending</option>
+              </select>
+            </div>
           </form>
           <button
             class="btn btn-success mb-2 d-lg-none"
@@ -109,256 +129,10 @@
             Create new post
           </button>
           <section class="bg-light">
-            <h1>Feed</h1>
-            <div class="overflow-y-auto h-px--400">
-              <div class="card mb-3 bg-secondary p-2 w-percentage--95">
-                <div class="row">
-                  <div class="col-4">
-                    <img
-                      class="rounded-circle w-25"
-                      src="/src/assets/profile.jpeg"
-                      alt="Profile picture of Thistle" />
-                    <span class="text-primay fs-6">@TipsyThistle</span>
-                  </div>
-                  <div class="col-8">
-                    <p class="card-text text-black">
-                      Thistlebeard the Tipsy 🍻 Just conjured a spell for
-                      bottomless ale mugs at the Dragon's Den Inn. A true
-                      masterwork of wizardry if I say so myself. Who's joining
-                      me? #AleMagic
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div class="card mb-3 bg-secondary p-2 w-percentage--95">
-                <div class="row">
-                  <div class="col-4">
-                    <img
-                      class="rounded-circle w-25"
-                      src="/src/assets/profile.jpeg"
-                      alt="Profile picture of Thistle" />
-                    <span class="text-primay fs-6">@TipsyThistle</span>
-                  </div>
-                  <div class="col-8">
-                    <p class="card-text text-black">
-                      Thistlebeard the Tipsy 🍻 Just conjured a spell for
-                      bottomless ale mugs at the Dragon's Den Inn. A true
-                      masterwork of wizardry if I say so myself. Who's joining
-                      me? #AleMagic
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div class="card mb-3 bg-secondary p-2 w-percentage--95">
-                <div class="row">
-                  <div class="col-4">
-                    <img
-                      class="rounded-circle w-25"
-                      src="/src/assets/profile.jpeg"
-                      alt="Profile picture of Thistle" />
-                    <span class="text-primay fs-6">@TipsyThistle</span>
-                  </div>
-                  <div class="col-8">
-                    <p class="card-text text-black">
-                      Thistlebeard the Tipsy 🍻 Just conjured a spell for
-                      bottomless ale mugs at the Dragon's Den Inn. A true
-                      masterwork of wizardry if I say so myself. Who's joining
-                      me? #AleMagic
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div class="card mb-3 bg-secondary p-2 w-percentage--95">
-                <div class="row">
-                  <div class="col-4">
-                    <img
-                      class="rounded-circle w-25"
-                      src="/src/assets/profile.jpeg"
-                      alt="Profile picture of Thistle" />
-                    <span class="text-primay fs-6">@TipsyThistle</span>
-                  </div>
-                  <div class="col-8">
-                    <p class="card-text text-black">
-                      Thistlebeard the Tipsy 🍻 Just conjured a spell for
-                      bottomless ale mugs at the Dragon's Den Inn. A true
-                      masterwork of wizardry if I say so myself. Who's joining
-                      me? #AleMagic
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div class="card mb-3 bg-secondary p-2 w-percentage--95">
-                <div class="row">
-                  <div class="col-4">
-                    <img
-                      class="rounded-circle w-25"
-                      src="/src/assets/profile.jpeg"
-                      alt="Profile picture of Thistle" />
-                    <span class="text-primay fs-6">@TipsyThistle</span>
-                  </div>
-                  <div class="col-8">
-                    <p class="card-text text-black">
-                      Thistlebeard the Tipsy 🍻 Just conjured a spell for
-                      bottomless ale mugs at the Dragon's Den Inn. A true
-                      masterwork of wizardry if I say so myself. Who's joining
-                      me? #AleMagic
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div class="card mb-3 bg-secondary p-2 w-percentage--95">
-                <div class="row">
-                  <div class="col-4">
-                    <img
-                      class="rounded-circle w-25"
-                      src="/src/assets/profile.jpeg"
-                      alt="Profile picture of Thistle" />
-                    <span class="text-primay fs-6">@TipsyThistle</span>
-                  </div>
-                  <div class="col-8">
-                    <p class="card-text text-black">
-                      Thistlebeard the Tipsy 🍻 Just conjured a spell for
-                      bottomless ale mugs at the Dragon's Den Inn. A true
-                      masterwork of wizardry if I say so myself. Who's joining
-                      me? #AleMagic
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div class="card mb-3 bg-secondary p-2 w-percentage--95">
-                <div class="row">
-                  <div class="col-4">
-                    <img
-                      class="rounded-circle w-25"
-                      src="/src/assets/profile.jpeg"
-                      alt="Profile picture of Thistle" />
-                    <span class="text-primay fs-6">@TipsyThistle</span>
-                  </div>
-                  <div class="col-8">
-                    <p class="card-text text-black">
-                      Thistlebeard the Tipsy 🍻 Just conjured a spell for
-                      bottomless ale mugs at the Dragon's Den Inn. A true
-                      masterwork of wizardry if I say so myself. Who's joining
-                      me? #AleMagic
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div class="card mb-3 bg-secondary p-2 w-percentage--95">
-                <div class="row">
-                  <div class="col-4">
-                    <img
-                      class="rounded-circle w-25"
-                      src="/src/assets/profile.jpeg"
-                      alt="Profile picture of Thistle" />
-                    <span class="text-primay fs-6">@TipsyThistle</span>
-                  </div>
-                  <div class="col-8">
-                    <p class="card-text text-black">
-                      Thistlebeard the Tipsy 🍻 Just conjured a spell for
-                      bottomless ale mugs at the Dragon's Den Inn. A true
-                      masterwork of wizardry if I say so myself. Who's joining
-                      me? #AleMagic
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div class="card mb-3 bg-secondary p-2 w-percentage--95">
-                <div class="row">
-                  <div class="col-4">
-                    <img
-                      class="rounded-circle w-25"
-                      src="/src/assets/profile.jpeg"
-                      alt="Profile picture of Thistle" />
-                    <span class="text-primay fs-6">@TipsyThistle</span>
-                  </div>
-                  <div class="col-8">
-                    <p class="card-text text-black">
-                      Thistlebeard the Tipsy 🍻 Just conjured a spell for
-                      bottomless ale mugs at the Dragon's Den Inn. A true
-                      masterwork of wizardry if I say so myself. Who's joining
-                      me? #AleMagic
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div class="card mb-3 bg-secondary p-2 w-percentage--95">
-                <div class="row">
-                  <div class="col-4">
-                    <img
-                      class="rounded-circle w-25"
-                      src="/src/assets/profile.jpeg"
-                      alt="Profile picture of Thistle" />
-                    <span class="text-primay fs-6">@TipsyThistle</span>
-                  </div>
-                  <div class="col-8">
-                    <p class="card-text text-black">
-                      Thistlebeard the Tipsy 🍻 Just conjured a spell for
-                      bottomless ale mugs at the Dragon's Den Inn. A true
-                      masterwork of wizardry if I say so myself. Who's joining
-                      me? #AleMagic
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div class="card mb-3 bg-secondary p-2 w-percentage--95">
-                <div class="row">
-                  <div class="col-4">
-                    <img
-                      class="rounded-circle w-25"
-                      src="/src/assets/profile.jpeg"
-                      alt="Profile picture of Thistle" />
-                    <span class="text-primay fs-6">@TipsyThistle</span>
-                  </div>
-                  <div class="col-8">
-                    <p class="card-text text-black">
-                      Thistlebeard the Tipsy 🍻 Just conjured a spell for
-                      bottomless ale mugs at the Dragon's Den Inn. A true
-                      masterwork of wizardry if I say so myself. Who's joining
-                      me? #AleMagic
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div class="card mb-3 bg-secondary p-2 w-percentage--95">
-                <div class="row">
-                  <div class="col-4">
-                    <img
-                      class="rounded-circle w-25"
-                      src="/src/assets/profile.jpeg"
-                      alt="Profile picture of Thistle" />
-                    <span class="text-primay fs-6">@TipsyThistle</span>
-                  </div>
-                  <div class="col-8">
-                    <p class="card-text text-black">
-                      Thistlebeard the Tipsy 🍻 Just conjured a spell for
-                      bottomless ale mugs at the Dragon's Den Inn. A true
-                      masterwork of wizardry if I say so myself. Who's joining
-                      me? #AleMagic
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div class="card mb-3 bg-secondary p-2 w-percentage--95">
-                <div class="row">
-                  <div class="col-4">
-                    <img
-                      class="rounded-circle w-25"
-                      src="/src/assets/profile.jpeg"
-                      alt="Profile picture of Thistle" />
-                    <span class="text-primay fs-6">@TipsyThistle</span>
-                  </div>
-                  <div class="col-8">
-                    <p class="card-text text-black">
-                      Thistlebeard the Tipsy 🍻 Just conjured a spell for
-                      bottomless ale mugs at the Dragon's Den Inn. A true
-                      masterwork of wizardry if I say so myself. Who's joining
-                      me? #AleMagic
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <h1 class="fs-6 m-0">Feed</h1>
+            <div
+              id="feed--container"
+              class="overflow-y-auto h-vh-90 p-2 d-flex flex-column gap-5"></div>
           </section>
         </div>
         <div
@@ -375,11 +149,12 @@
             <div class="form-floating">
               <input
                 class="form-control mb-2"
-                name="topic--feed"
-                id="topic--feed"
-                placeholder="topic"
-                type="text" />
-              <label for="topic--feed">topic</label>
+                name="title--feed"
+                id="title--feed"
+                placeholder="title"
+                type="text"
+                data-formClear />
+              <label for="title--feed">title</label>
             </div>
             <div class="form-floating">
               <textarea
@@ -388,10 +163,38 @@
                 placeholder="your thoughts"
                 id="text-body--feed"
                 cols="30"
-                rows="10"></textarea>
+                rows="10"
+                data-formClear></textarea>
               <label for="text-body--feed">Your thoughts</label>
             </div>
-            <button class="btn btn-secondary">Post</button>
+            <div class="form-floating">
+              <input
+                class="form-control mb-2"
+                name="media--feed"
+                id="media--feed"
+                placeholder="img url"
+                type="text"
+                data-formClear />
+              <label for="topic--feed">img url</label>
+            </div>
+            <div class="form-floating">
+              <input
+                class="form-control mb-2"
+                name="tags--feed"
+                id="tags--feed"
+                placeholder="tags seperated by #"
+                type="text"
+                data-formClear />
+              <label for="tags--feed">tags seperated by #</label>
+            </div>
+            <button
+              id="post--button"
+              type="button"
+              data-bs-dismiss="offcanvas"
+              data-bs-target="#offcanvas--new-post"
+              class="btn btn-secondary">
+              Post
+            </button>
           </form>
         </div>
       </div>
