@@ -28,6 +28,20 @@ export default function validateSelect(domEl) {
         return true;
     }
 }
+/**
+ * Validates the value of a given DOM input element based on a predicate function.
+ * If the value is invalid, an error message is displayed after the input element.
+ *
+ * @param {HTMLInputElement} domEl - The DOM input element to be validated.
+ * @param {string} message - The error message to be displayed if the validation fails.
+ * @param {Function} predicate - A function that takes the input value and returns a boolean indicating its validity.
+ *
+ * @returns {boolean} - Returns true if the validation is successful, otherwise returns false.
+ *
+ * @example
+ * const inputElement = document.getElementById('passwordInput');
+ * validateForm(inputElement, "Please input a password with min 8 characters", (value) => value.length > 7);
+ */
 export function validateForm(domEl, message, predicate) {
     var _a;
     if (!predicate(domEl.value)) {

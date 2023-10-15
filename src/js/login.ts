@@ -1,4 +1,5 @@
 import { endpoints } from "./endpoints.mjs";
+import fadeText from "./fadeText.mjs";
 import { validateForm } from "./formValidation.mjs";
 
 type registerProp = "email" | "userName" | "password" | "repeatedPassword";
@@ -113,12 +114,24 @@ async function registerAccount({
   userName,
   password,
 }: registerInputValues) {
-  const response = await fetch(`${endpoints.baseUrl + endpoints.register}`, {
-    method: "POST",
-    headers: { "Content-type": "application/json" },
-    body: JSON.stringify({ email, name: userName, password }),
-  });
-  const data = await response.json();
+  try {
+    const response = await fetch(`${endpoints.baseUrl + endpoints.register}`, {
+      method: "POST",
+      headers: { "Content-type": "application/json" },
+      body: JSON.stringify({ email, name: userName, password }),
+    });
+    const data = await response.json();
+    if (data.statusCode < 500 && data.statusCode >= 400) {
+      throw new Error(data.errors.map((error) => error.message).join(","));
+    }
+
+    if (data.id) {
+      fadeText();
+    }
+    console.log(data);
+  } catch (error) {
+    alert(error);
+  }
 }
 
 buttonRegister?.addEventListener("click", () => {

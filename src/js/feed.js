@@ -233,5 +233,7 @@ function searchApi(array, category = "body", count = 0, searchWord = null) {
 (function renderUserSpecific() {
     var _a;
     (_a = document.querySelector("[data-userName]")) === null || _a === void 0 ? void 0 : _a.textContent = JSON.parse(localStorage.getItem("currentUser"));
-    document.querySelector("[data-userImg]").src = JSON.parse(localStorage.getItem("avatar"));
+    document.querySelector("[data-userImg]").src = JSON.parse(localStorage.getItem("avatar"))
+        ? JSON.parse(localStorage.getItem("avatar"))
+        : "../assets/placeholder.png";
 })();

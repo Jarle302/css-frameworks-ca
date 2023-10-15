@@ -8,6 +8,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 import { endpoints } from "./endpoints.mjs";
+import fadeText from "./fadeText.mjs";
 import { validateForm } from "./formValidation.mjs";
 const registerObject = {
     email: "email",
@@ -92,12 +93,24 @@ collectInput(inputRpassword, "repeatedPassword");
  */
 function registerAccount({ email, userName, password, }) {
     return __awaiter(this, void 0, void 0, function* () {
-        const response = yield fetch(`${endpoints.baseUrl + endpoints.register}`, {
-            method: "POST",
-            headers: { "Content-type": "application/json" },
-            body: JSON.stringify({ email, name: userName, password }),
-        });
-        const data = yield response.json();
+        try {
+            const response = yield fetch(`${endpoints.baseUrl + endpoints.register}`, {
+                method: "POST",
+                headers: { "Content-type": "application/json" },
+                body: JSON.stringify({ email, name: userName, password }),
+            });
+            const data = yield response.json();
+            if (data.statusCode < 500 && data.statusCode >= 400) {
+                throw new Error(data.errors.map((error) => error.message).join(","));
+            }
+            if (data.id) {
+                fadeText();
+            }
+            console.log(data);
+        }
+        catch (error) {
+            alert(error);
+        }
     });
 }
 buttonRegister === null || buttonRegister === void 0 ? void 0 : buttonRegister.addEventListener("click", () => {

@@ -329,5 +329,7 @@ async function searchApi(
   );
   document.querySelector("[data-userImg]").src = JSON.parse(
     localStorage.getItem("avatar")
-  );
+  )
+    ? JSON.parse(localStorage.getItem("avatar"))
+    : "../assets/placeholder.png";
 })();
